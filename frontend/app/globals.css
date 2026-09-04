@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind v4:
+ * Use the user's system/browser color preference for dark mode.
+ *
+ * This means:
+ *   Device = Light → light theme
+ *   Device = Dark  → dark theme
+ */
+@variant dark (@media (prefers-color-scheme: dark));
+
+
+:root {
+  --background: #fafafa;
+  --foreground: #09090b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+
+/*
+ * Respect the user's system color scheme for
+ * native browser UI as well.
+ */
+html {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  :root {
+    --background: #09090b;
+    --foreground: #fafafa;
+  }
+}
+
+
+/*
+ * Borders
+ */
+
+* {
+  border-color: var(--border,
+      rgba(0, 0, 0, 0.08));
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    border-color: var(--border,
+        rgba(255, 255, 255, 0.08));
+  }
+}
+
+
+/*
+ * Body
+ */
+
+body {
+  font-family: var(--font-sans),
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--background);
+  color: var(--foreground);
+}
+
+
+/*
+ * Selection
+ */
+
+::selection {
+  background-color: #18181b;
+  color: #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background-color: #f4f4f5;
+    color: #09090b;
+  }
+}
+
+
+/*
+ * Minimalist scrollbar
+ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120,
+      120,
+      120,
+      0.2);
+
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120,
+      120,
+      120,
+      0.4);
+}
